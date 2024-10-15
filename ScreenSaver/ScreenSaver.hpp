@@ -69,6 +69,18 @@
     # ifndef _GLIBCXX_RANDOM
         # include <random>
     # endif // _GLIBCXX_RANDOM
+    //-- Include Thread Library
+    # ifndef _GLIBCXX_THREAD
+        # include <thread>
+    # endif // _GLIBCXX_THREAD
+    //-- Include Chrono Library
+    # ifndef _GLIBCXX_CHRONO
+        # include <chrono>
+    # endif // _GLIBCXX_CHRONO
+    //-- Include Deque Library
+    # ifndef _GLIBCXX_DEQUE
+        # include <deque>
+    # endif // _GLIBCXX_DEQUE
     /**
      * @brief Screen Saver Types
      * @enum RKScreenSaverType

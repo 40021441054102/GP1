@@ -40,7 +40,7 @@
      * @brief Circle Path Speed
      * @note Speed is in Milliseconds
      */
-    # define CIRCLE_PATH_SPEED 30
+    # define CIRCLE_PATH_SPEED 0.02
     /**
      * @def CIRCLE_PATH_CENTER_X
      * @brief Circle Path Center X-Axis

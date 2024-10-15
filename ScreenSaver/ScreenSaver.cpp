@@ -165,6 +165,257 @@
                     window.update();
                     //-- Update Time
                     time += 0.01;
+                    //-- Sleep
+                    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+                }
+                break;
+            }
+            //-- Infinity Screen Saver
+            case RK_SCREEN_SAVER_INFINITE: {
+                //-- Create Infinity Path Object
+                RKInfinityPath infinity_path;
+                //-- Define Time
+                double time = 0.0;
+                //-- Obtain a Random Number from Hardware
+                std::random_device rd;
+                //-- Seed the Generator
+                std::mt19937 gen(rd());
+                //-- Define Distribution for Color
+                std::uniform_int_distribution<> dis_color(73, 255);
+                //-- Define Distribution for Point Position Noises
+                std::uniform_int_distribution<> dis_noise(5, 10);
+                //-- Define Distribution for Sign
+                std::uniform_int_distribution<> dis_sign(0, 1);
+                //-- Define Point 1 X
+                int x1 = RK_SCREEN_SAVER_WINDOW_WIDTH / 2 - 200;
+                //-- Define Point 1 Y
+                int y1 = RK_SCREEN_SAVER_WINDOW_HEIGHT / 2;
+                //-- Define Point 2 X
+                int x2 = RK_SCREEN_SAVER_WINDOW_WIDTH / 2 + 200;
+                //-- Define Point 2 Y
+                int y2 = RK_SCREEN_SAVER_WINDOW_HEIGHT / 2;
+                //-- Define Noises
+                int noise_1 = 0, noise_2 = 0, noise_3 = 0, noise_4 = 0;
+                //-- Define Sign
+                int sign1, sign2, sign3, sign4;
+                //-- Window Loop
+                while (true) {
+                    //-- Clear the Window
+                    // window.clear(0, 10, 18, 255);
+                    //-- Get Position
+                    RKGPoint position = infinity_path.getPosition(time);
+                    //-- Set Sign 1
+                    sign1 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set Sign 2
+                    sign2 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set Sign 3
+                    sign3 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set Sign 4
+                    sign4 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set x1
+                    x1 = position.x + dis_noise(gen) * sign1; // * dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set y1
+                    y1 = position.y + dis_noise(gen) * sign2; // * dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set x2
+                    x2 = position.x + dis_noise(gen) * sign3; // * dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set y2
+                    y2 = position.y + dis_noise(gen) * sign4; // * dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Draw a Line
+                    line.drawLine(
+                        x1, y1,
+                        x2, y2,
+                        0.0f, 0.0f,
+                        {
+                            0,
+                            dis_color(gen),
+                            dis_color(gen)
+                        }
+                    );
+                    //-- Update the Window
+                    window.update();
+                    //-- Update Time
+                    time += 0.01;
+                    //-- Sleep
+                    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+                }
+                break;
+            }
+            //-- Flower Screen Saver
+            case RK_SCREEN_SAVER_WISH_FLOWER: {
+                //-- Create Flower Path Object
+                RKFlowerPath flower_path;
+                //-- Define Time
+                double time = 0.0;
+                //-- Obtain a Random Number from Hardware
+                std::random_device rd;
+                //-- Seed the Generator
+                std::mt19937 gen(rd());
+                //-- Define Distribution for Color
+                std::uniform_int_distribution<> dis_color(73, 255);
+                //-- Define Distribution for Point Position Noises
+                std::uniform_int_distribution<> dis_noise(5, 10);
+                //-- Define Distribution for Sign
+                std::uniform_int_distribution<> dis_sign(0, 1);
+                //-- Define Point 1 X
+                int x1 = RK_SCREEN_SAVER_WINDOW_WIDTH / 2 - 200;
+                //-- Define Point 1 Y
+                int y1 = RK_SCREEN_SAVER_WINDOW_HEIGHT / 2;
+                //-- Define Point 2 X
+                int x2 = RK_SCREEN_SAVER_WINDOW_WIDTH / 2 + 200;
+                //-- Define Point 2 Y
+                int y2 = RK_SCREEN_SAVER_WINDOW_HEIGHT / 2;
+                //-- Define Noises
+                int noise_1 = 0, noise_2 = 0, noise_3 = 0, noise_4 = 0;
+                //-- Define Sign
+                int sign1, sign2, sign3, sign4;
+                //-- Window Loop
+                while (true) {
+                    //-- Clear the Window
+                    // window.clear(0, 10, 18, 255);
+                    //-- Get Position
+                    RKGPoint position = flower_path.getPosition(time);
+                    //-- Set Sign 1
+                    sign1 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set Sign 2
+                    sign2 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set Sign 3
+                    sign3 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set Sign 4
+                    sign4 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set x1
+                    x1 = position.x + dis_noise(gen) * sign1; // * dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set y1
+                    y1 = position.y + dis_noise(gen) * sign2; // * dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set x2
+                    x2 = position.x + dis_noise(gen) * sign3; // * dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set y2
+                    y2 = position.y + dis_noise(gen) * sign4; // * dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Draw a Line
+                    line.drawLine(
+                        x1, y1,
+                        x2, y2,
+                        0.0f, 0.0f,
+                        {
+                            0,
+                            dis_color(gen),
+                            dis_color(gen)
+                        }
+                    );
+                    //-- Update the Window
+                    window.update();
+                    //-- Update Time
+                    time += 0.01;
+                    //-- Sleep
+                    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+                }
+                break;
+            }
+            //-- Random Screen Saver
+            case RK_SCREEN_SAVER_RANDOM: {
+                //-- Define Line Structure
+                struct Line {
+                    float x1, y1, x2, y2;
+                    float r, g, b;
+                };
+                //-- Define a Buffer to Store the Last N Lines
+                std::deque<Line> linesBuffer;
+                //-- Define the Maximum Number of Lines
+                const size_t maxLines = 100;
+                //-- Create Random Path Object
+                RKRandomPath random_path;
+                // RKInfinityPath random_path;
+                //-- Define Time
+                double time = 0.0;
+                //-- Obtain a Random Number from Hardware
+                std::random_device rd;
+                //-- Seed the Generator
+                std::mt19937 gen(rd());
+                //-- Define Distribution for Color
+                std::uniform_int_distribution<> dis_color(73, 255);
+                //-- Define Distribution for Point Position Noises
+                std::uniform_int_distribution<> dis_noise(5, 15);
+                //-- Define Distribution for Sign
+                std::uniform_int_distribution<> dis_sign(0, 1);
+                //-- Define Distribution for K
+                std::uniform_real_distribution<> dis_k(0, 2);
+                //-- Define Distribution for Sign
+                std::uniform_int_distribution<> dis_sign_k(-1, 1);
+                //-- Define Point 1 X
+                int x1 = RK_SCREEN_SAVER_WINDOW_WIDTH / 2;
+                //-- Define Point 1 Y
+                int y1 = RK_SCREEN_SAVER_WINDOW_HEIGHT / 2;
+                //-- Define Point 2 X
+                int x2 = RK_SCREEN_SAVER_WINDOW_WIDTH / 2;
+                //-- Define Point 2 Y
+                int y2 = RK_SCREEN_SAVER_WINDOW_HEIGHT / 2;
+                //-- Define Noises
+                int noise_1 = 0, noise_2 = 0, noise_3 = 0, noise_4 = 0;
+                //-- Define Sign
+                int sign1, sign2, sign3, sign4;
+                //-- Define RKLine Object
+                RKLine lineDrawer;
+                //-- Window Loop
+                while (true) {
+                    //-- Clear the Window
+                    window.clear(0, 10, 18, 255);
+                    //-- Get Position
+                    RKGPoint position = random_path.getPosition(time);
+                    //-- Set Signs
+                    sign1 = dis_sign(gen) == 0 ? -1 : 1;
+                    sign2 = dis_sign(gen) == 0 ? -1 : 1;
+                    sign3 = dis_sign(gen) == 0 ? -1 : 1;
+                    sign4 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set x1 and y1
+                    // x1 = position.x + dis_noise(gen) * sign1;
+                    // y1 = position.y + dis_noise(gen) * sign2;
+                    // //-- Set x2 and y2
+                    x2 = position.x + dis_noise(gen) * sign3;
+                    y2 = position.y + dis_noise(gen) * sign4;
+                    // x1 = 0;
+                    // y1 = 0;
+
+
+                    //-- Smooth Color Changes
+                    // float green = (sin(time * 2) * 0.5f + 0.5f) * 255;
+                    // float blue = (cos(time * 2) * 0.5f + 0.5f) * 255;
+                    float red   = (sin(2 * time + 0) * 0.5f + 0.5f) * 255;
+                    float green = (sin(2 * time + 2.0f) * 0.5f + 0.5f) * 255;
+                    float blue  = (sin(2 * time + 4.0f) * 0.5f + 0.5f) * 255;
+                    //-- Add the New Line to the Buffer
+                    linesBuffer.push_back({
+                        static_cast<float>(x1),
+                        static_cast<float>(y1),
+                        static_cast<float>(x2),
+                        static_cast<float>(y2),
+                        float(red),
+                        float(green),
+                        float(blue)
+                    });
+                    //-- Remove the Oldest Line
+                    if (linesBuffer.size() > maxLines) {
+                        linesBuffer.pop_front();
+                    }
+                    //-- Draw All Lines in the Buffer
+                    for (const auto& line : linesBuffer) {
+                        lineDrawer.drawLine(
+                            static_cast<int>(line.x1), static_cast<int>(line.y1),
+                            static_cast<int>(line.x2), static_cast<int>(line.y2),
+                            0.0f, 0.0f, 
+                            {
+                                static_cast<int>(line.r),
+                                static_cast<int>(line.g),
+                                static_cast<int>(line.b),
+                                255
+                            }
+                        );
+
+                    }
+                    //-- Update the Window
+                    window.update();
+                    //-- Update Time
+                    time += 0.02;
+                    //-- Sleep
+                    std::this_thread::sleep_for(std::chrono::milliseconds(20));
                 }
                 break;
             }

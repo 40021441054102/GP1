@@ -1,15 +1,15 @@
-# ifndef RK_GRAPHICS_PROJECT_SCREEN_SAVER_CIRCLE_PATH
-    # include "CirclePath.hpp"
+# ifndef RK_GRAPHICS_PROJECT_SCREEN_SAVER_INFINITY_PATH
+    # include "InfinityPath.hpp"
     /**
-     * @brief Construct a New RKCirclePath Object
+     * @brief Construct a New RKInfinityPath Object
      */
-    RKCirclePath::RKCirclePath() {}
+    RKInfinityPath::RKInfinityPath() {}
     /**
-     * @brief Destroy the RKCirclePath Object
+     * @brief Destroy the RKInfinityPath Object
      */
-    RKCirclePath::~RKCirclePath() {}
+    RKInfinityPath::~RKInfinityPath() {}
     /**
-     * @brief Method to Get Position of Circle Path According to Time
+     * @brief Method to Get Position of Infinity Path According to Time
      * @param time Time
      * @param radius Radius
      * @param centerX Center X
@@ -18,7 +18,7 @@
      * @note Default Values are Defined in Header File
      * @return RKGPoint Position
      */
-    RKGPoint RKCirclePath::getPosition(
+    RKGPoint RKInfinityPath::getPosition(
         double time,
         double radius,
         double centerX,
@@ -30,10 +30,10 @@
         //-- Set Position X
         position.x = centerX + radius * sin(time);
         //-- Set Position Y
-        position.y = centerY + radius * cos(time);
+        position.y = centerY + radius * sin(time) * cos(time);
         //-- Set Position Z
         position.z = centerZ;
         //-- Return Position
         return position;
     }
-# endif // RK_GRAPHICS_PROJECT_SCREEN_SAVER_CIRCLE_PATH
+# endif // RK_GRAPHICS_PROJECT_SCREEN_SAVER_INFINITY_PATH
