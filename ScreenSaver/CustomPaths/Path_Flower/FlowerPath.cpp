@@ -28,20 +28,20 @@
         double centerX,
         double centerY
     ) {
-        // //-- Initialize Position
-        // RKGPoint position;
-        // //-- Calculate Position
-        // position.x = scale * (cos(time) + cos((k - 1) * time)) + centerX;
-        // position.y = scale * (sin(time) - sin((k - 1) * time)) + centerY;
-        // //-- Return Position
-        // return position;
         //-- Initialize Position
         RKGPoint position;
         //-- Calculate Position
-        position.x = scale * (sin(time) + cos((k + 3) * time)) + centerX;
-        position.y = scale * (cos(time) - sin((k - 1) * time)) + centerY;
+        position.x = scale * (cos(time) + cos((k - 1) * time)) + centerX;
+        position.y = scale * (sin(time) - sin((k - 1) * time)) + centerY;
         //-- Return Position
         return position;
+        //-- Initialize Position
+        // RKGPoint position;
+        //-- Calculate Position
+        // position.x = scale * (sin(time) + cos((k + 3) * time)) + centerX;
+        // position.y = scale * (cos(time) - sin((k - 1) * time)) + centerY;
+        //-- Return Position
+        // return position;
     }
         // //-- Initialize Position
         // RKGPoint position;
