@@ -61,6 +61,10 @@
     # ifndef RK_GRAPHICS_LINE
         # include "Line.hpp"
     # endif // RK_GRAPHICS_LINE
+    //-- Include Polygon
+    # ifndef RK_GRAPHICS_POLYGON
+        # include "Polygon.hpp"
+    # endif // RK_GRAPHICS_POLYGON
     //-- Include Custom Paths
     # ifndef RK_GRAPHICS_PROJECT_SCREEN_SAVER_CIRCLE_PATH
         # include "CustomPaths.hpp"
@@ -87,21 +91,27 @@
      * @note This Enum Defines Different Types of Screen Savers
      * @param RK_SCREEN_SAVER_SOUND_EQUALIZER_CIRCLE Circle Shape Sound Equalizer Screen Saver
      * @param RK_SCREEN_SAVER_SOUND_EQUALIZER_LINE Line Shape Sound Equalizer Screen Saver
+     * @param RK_SCREEN_SAVER_CUSTOM_POLYGON_LINE Custom Polygon Line Screen Saver
+     * @param RK_SCREEN_SAVER_CUSTOM_POLYGON Custom Polygon Screen Saver
      * @param RK_SCREEN_SAVER_WISH_FLOWER Wish Flower Screen Saver
      * @param RK_SCREEN_SAVER_INFINITE Infinite Screen Saver
      * @param RK_SCREEN_SAVER_RANDOM Random Screen Saver
      * @param RK_SCREEN_SAVER_CIRCLE Circle Screen Saver
      * @param RK_SCREEN_SAVER_CUSTOM Custom Screen Saver
      * @param RK_SCREEN_SAVER_HEART Heart Screen Saver
+     * @param RK_SCREEN_SAVER_TEST Test Screen Saver
      */
     enum RKScreenSaverType {
+        RK_SCREEN_SAVER_TEST,
+        RK_SCREEN_SAVER_CIRCLE,
+        RK_SCREEN_SAVER_RANDOM,
+        RK_SCREEN_SAVER_INFINITE,
+        RK_SCREEN_SAVER_WISH_FLOWER,
+        RK_SCREEN_SAVER_CUSTOM,
+        RK_SCREEN_SAVER_CUSTOM_POLYGON,
+        RK_SCREEN_SAVER_CUSTOM_POLYGON_LINE,
         RK_SCREEN_SAVER_SOUND_EQUALIZER_CIRCLE,
         RK_SCREEN_SAVER_SOUND_EQUALIZER_LINE,
-        RK_SCREEN_SAVER_WISH_FLOWER,
-        RK_SCREEN_SAVER_INFINITE,
-        RK_SCREEN_SAVER_RANDOM,
-        RK_SCREEN_SAVER_CIRCLE,
-        RK_SCREEN_SAVER_CUSTOM,
         RK_SCREEN_SAVER_HEART
     };
     /**

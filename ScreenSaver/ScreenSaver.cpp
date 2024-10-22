@@ -100,6 +100,37 @@
         );
         //-- Handle Screen Saver Type
         switch (type) {
+            //-- Test Screen Saver
+            case RK_SCREEN_SAVER_TEST: {
+                RKPolygon polygon;
+                std::deque<RKGPointColor> polyBuffer;
+                RKGPointColor p1,p2,p3,p4;
+                p1.x = RK_SCREEN_SAVER_WINDOW_WIDTH * 1 / 3;
+                p1.y = RK_SCREEN_SAVER_WINDOW_HEIGHT * 1 / 3;
+                p2.x = RK_SCREEN_SAVER_WINDOW_WIDTH * 1 / 3;
+                p2.y = RK_SCREEN_SAVER_WINDOW_HEIGHT * 2 / 3;
+                p3.x = RK_SCREEN_SAVER_WINDOW_WIDTH * 2 / 3;
+                p3.y = RK_SCREEN_SAVER_WINDOW_HEIGHT * 2 / 3;
+                p4.x = RK_SCREEN_SAVER_WINDOW_WIDTH * 2 / 3;
+                p4.y = RK_SCREEN_SAVER_WINDOW_HEIGHT * 1 / 3;
+                polyBuffer.push_back(p1);
+                polyBuffer.push_back(p2);
+                polyBuffer.push_back(p3);
+                polyBuffer.push_back(p4);
+                while (true) {
+                    //-- Clear the Window
+                    window.clear(0, 10, 18, 255);
+                    //-- Draw Polygon
+                    polygon.drawPolygon(
+                        polyBuffer
+                    );
+                    //-- Update the Window
+                    window.update();
+                    //-- Sleep
+                    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+                }
+                break;
+            }
             //-- Circle Screen Saver
             case RK_SCREEN_SAVER_CIRCLE: {
                 //-- Create Circle Path Object
@@ -310,8 +341,8 @@
                 }
                 break;
             }
-            //-- Random Screen Saver
-            case RK_SCREEN_SAVER_RANDOM: {
+            //-- Custom Screen Saver
+            case RK_SCREEN_SAVER_CUSTOM: {
                 //-- Define Line Structure
                 struct Line {
                     float x1, y1, x2, y2;
@@ -408,12 +439,283 @@
                                 255
                             }
                         );
-
                     }
                     //-- Update the Window
                     window.update();
                     //-- Update Time
                     time += 0.02;
+                    //-- Sleep
+                    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+                }
+                break;
+            }
+            //-- Custom Polygon Screen Saver
+            case RK_SCREEN_SAVER_CUSTOM_POLYGON: {
+                //-- Define a Buffer to Store the Last N Polygons
+                std::deque<RKGPointColor> polyBuffer;
+                //-- Define the Maximum Number of Polygons
+                const size_t maxPolys = 200;
+                //-- Create Random Path Object
+                // RKRandomPath random_path;
+                RKRandomPath random_path;
+                //-- Define Time
+                double time = 0.0;
+                //-- Obtain a Random Number from Hardware
+                std::random_device rd;
+                //-- Seed the Generator
+                std::mt19937 gen(rd());
+                //-- Define Distribution for Color
+                std::uniform_int_distribution<> dis_color(73, 255);
+                //-- Define Distribution for Point Position Noises
+                std::uniform_int_distribution<> dis_noise(1, 3);
+                //-- Define Distribution for Sign
+                std::uniform_int_distribution<> dis_sign(0, 1);
+                //-- Define Distribution for K
+                std::uniform_real_distribution<> dis_k(0, 2);
+                //-- Define Distribution for Sign
+                std::uniform_int_distribution<> dis_sign_k(-1, 1);
+                //-- Define Point 1 X
+                int x1 = RK_SCREEN_SAVER_WINDOW_WIDTH / 2;
+                //-- Define Point 1 Y
+                int y1 = RK_SCREEN_SAVER_WINDOW_HEIGHT / 2;
+                //-- Define Sign
+                int sign1, sign2;
+                //-- Define RKPolygon Object
+                RKPolygon polygon;
+                //-- Window Loop
+                while (true) {
+                    //-- Clear the Window
+                    window.clear(0, 10, 18, 255);
+                    //-- Get Position
+                    RKGPoint position = random_path.getPosition(time);
+                    //-- Set Signs
+                    sign1 = dis_sign(gen) == 0 ? -1 : 1;
+                    sign2 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Smooth Color Changes
+                    // float green = (sin(time * 2) * 0.5f + 0.5f) * 255;
+                    // float blue = (cos(time * 2) * 0.5f + 0.5f) * 255;
+                    float red   = (sin(2 * time + 0) * 0.5f + 0.5f) * 255;
+                    // red = 0.0;
+                    float green = (cos(2 * time + 3.0f) * 0.5f + 0.5f) * 255;
+                    float blue  = (sin(2 * time + 4.0f) * 0.5f + 0.5f) * 255;
+                    //-- Define Color Object
+                    RKGColor color;
+                    //-- Set Colors
+                    color.r = red;
+                    color.g = green;
+                    color.b = blue;
+                    //-- Define RKGPointColor Object
+                    RKGPointColor point;
+                    //-- Set Point Propetries
+                    point.x = position.x; // + dis_noise(gen) * sign1;
+                    point.y = position.y; // + dis_noise(gen) * sign2;
+                    point.z = 0;
+                    point.color = color;
+                    //-- Add the New Line to the Buffer
+                    polyBuffer.push_back(point);
+                    //-- Remove the Oldest Line
+                    if (polyBuffer.size() > maxPolys) {
+                        polyBuffer.pop_front();
+                    }
+                    //-- Draw All Lines in the Buffer
+                    for (const auto& line : polyBuffer) {
+                        polygon.drawPolygon(polyBuffer);
+                    }
+                    //-- Update the Window
+                    window.update();
+                    // std::cout << time << std::endl;
+                    //-- Update Time
+                    time += 0.01;
+                    //-- Sleep
+                    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+                }
+                break;
+            }
+            //-- Custom Line Polygon Screen Saver
+            case RK_SCREEN_SAVER_CUSTOM_POLYGON_LINE: {
+                //-- Define a Buffer to Store the Last N Polygons
+                std::deque<RKGPointColor> polyBuffer;
+                //-- Define the Maximum Number of Polygons
+                const size_t maxPolys = 210;
+                //-- Create Random Path Object
+                // RKRandomPath random_path;
+                RKFlowerPath random_path;
+                //-- Define Time
+                double time = 0.6;
+                //-- Obtain a Random Number from Hardware
+                std::random_device rd;
+                //-- Seed the Generator
+                std::mt19937 gen(rd());
+                //-- Define Distribution for Color
+                std::uniform_int_distribution<> dis_color(73, 255);
+                //-- Define Distribution for Point Position Noises
+                std::uniform_int_distribution<> dis_noise(5, 15);
+                //-- Define Distribution for Sign
+                std::uniform_int_distribution<> dis_sign(0, 1);
+                //-- Define Distribution for K
+                std::uniform_real_distribution<> dis_k(0, 2);
+                //-- Define Distribution for Sign
+                std::uniform_int_distribution<> dis_sign_k(-1, 1);
+                //-- Define Point 1 X
+                int x1 = RK_SCREEN_SAVER_WINDOW_WIDTH / 2;
+                //-- Define Point 1 Y
+                int y1 = RK_SCREEN_SAVER_WINDOW_HEIGHT / 2;
+                //-- Define Sign
+                int sign1, sign2;
+                //-- Define RKPolygon Object
+                RKPolygon polygon;
+                //-- Window Loop
+                while (true) {
+                    //-- Clear the Window
+                    window.clear(0, 10, 18, 255);
+                    //-- Get Position
+                    RKGPoint position = random_path.getPosition(time);
+                    //-- Set Signs
+                    sign1 = dis_sign(gen) == 0 ? -1 : 1;
+                    sign2 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Smooth Color Changes
+                    // float green = (sin(time * 2) * 0.5f + 0.5f) * 255;
+                    // float blue = (cos(time * 2) * 0.5f + 0.5f) * 255;
+                    float red   = (sin(2 * time + 0) * 0.5f + 0.5f) * 255;
+                    float green = (sin(2 * time + 2.0f) * 0.5f + 0.5f) * 255;
+                    float blue  = (sin(2 * time + 4.0f) * 0.5f + 0.5f) * 255;
+                    //-- Define Color Object
+                    RKGColor color;
+                    //-- Set Colors
+                    color.r = red;
+                    color.g = green;
+                    color.b = blue;
+                    //-- Define RKGPointColor Object
+                    RKGPointColor point;
+                    //-- Set Point Propetries
+                    point.x = position.x + dis_noise(gen) * sign1;
+                    point.y = position.y + dis_noise(gen) * sign2;
+                    point.z = 0;
+                    point.color = color;
+                    //-- Add the New Line to the Buffer
+                    polyBuffer.push_back(point);
+                    //-- Remove the Oldest Line
+                    if (polyBuffer.size() > maxPolys) {
+                        polyBuffer.pop_front();
+                    }
+                    //-- Draw All Lines in the Buffer
+                    for (const auto& line : polyBuffer) {
+                        polygon.drawLinePolygon(polyBuffer);
+                    }
+                    //-- Update the Window
+                    window.update();
+                    // std::cout << time << std::endl;
+                    //-- Update Time
+                    time += 0.03;
+                    //-- Sleep
+                    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+                }
+                break;
+            }
+            //-- Random Screen Saver
+            case RK_SCREEN_SAVER_RANDOM: {
+                //-- Define Line Structure
+                struct Line {
+                    float x1, y1, x2, y2;
+                    float r, g, b;
+                };
+                //-- Define a Buffer to Store the Last N Lines
+                std::deque<Line> linesBuffer;
+                //-- Define the Maximum Number of Lines
+                const size_t maxLines = 80;
+                //-- Create Random Path Object
+                RKRandomPath random_path;
+                // RKInfinityPath random_path;
+                //-- Define Time
+                double time = 0.0;
+                //-- Obtain a Random Number from Hardware
+                std::random_device rd;
+                //-- Seed the Generator
+                std::mt19937 gen(rd());
+                //-- Define Distribution for Color
+                std::uniform_int_distribution<> dis_color(73, 255);
+                //-- Define Distribution for Point Position Noises
+                std::uniform_int_distribution<> dis_noise(5, 15);
+                //-- Define Distribution for Sign
+                std::uniform_int_distribution<> dis_sign(0, 1);
+                //-- Define Distribution for K
+                std::uniform_real_distribution<> dis_k(0, 2);
+                //-- Define Distribution for Sign
+                std::uniform_int_distribution<> dis_sign_k(-1, 1);
+                //-- Define Point 1 X
+                int x1 = RK_SCREEN_SAVER_WINDOW_WIDTH / 2;
+                //-- Define Point 1 Y
+                int y1 = RK_SCREEN_SAVER_WINDOW_HEIGHT / 2;
+                //-- Define Point 2 X
+                int x2 = RK_SCREEN_SAVER_WINDOW_WIDTH / 2;
+                //-- Define Point 2 Y
+                int y2 = RK_SCREEN_SAVER_WINDOW_HEIGHT / 2;
+                //-- Define Noises
+                int noise_1 = 0, noise_2 = 0, noise_3 = 0, noise_4 = 0;
+                //-- Define Sign
+                int sign1, sign2, sign3, sign4;
+                //-- Define RKLine Object
+                RKLine lineDrawer;
+                //-- Window Loop
+                while (true) {
+                    //-- Clear the Window
+                    window.clear(0, 10, 18, 255);
+                    //-- Get Position
+                    RKGPoint position = random_path.getPosition(time);
+                    //-- Set Signs
+                    sign1 = dis_sign(gen) == 0 ? -1 : 1;
+                    sign2 = dis_sign(gen) == 0 ? -1 : 1;
+                    sign3 = dis_sign(gen) == 0 ? -1 : 1;
+                    sign4 = dis_sign(gen) == 0 ? -1 : 1;
+                    //-- Set x1 and y1
+                    x1 = position.x + dis_noise(gen) * sign1;
+                    y1 = position.y + dis_noise(gen) * sign2;
+                    // //-- Set x2 and y2
+                    x2 = position.x + dis_noise(gen) * sign3;
+                    y2 = position.y + dis_noise(gen) * sign4;
+                    // y1 = RK_SCREEN_SAVER_WINDOW_HEIGHT / 2 + position.y;
+                    // x1 = 0;
+                    // y1 = 0;
+
+
+                    //-- Smooth Color Changes
+                    // float green = (sin(time * 2) * 0.5f + 0.5f) * 255;
+                    // float blue = (cos(time * 2) * 0.5f + 0.5f) * 255;
+                    float red   = (sin(2 * time + 0) * 0.5f + 0.5f) * 255;
+                    float green = (sin(2 * time + 2.0f) * 0.5f + 0.5f) * 255;
+                    float blue  = (sin(2 * time + 4.0f) * 0.5f + 0.5f) * 255;
+                    //-- Add the New Line to the Buffer
+                    linesBuffer.push_back({
+                        static_cast<float>(x1),
+                        static_cast<float>(y1),
+                        static_cast<float>(x2),
+                        static_cast<float>(y2),
+                        float(red),
+                        float(green),
+                        float(blue)
+                    });
+                    //-- Remove the Oldest Line
+                    if (linesBuffer.size() > maxLines) {
+                        linesBuffer.pop_front();
+                    }
+                    //-- Draw All Lines in the Buffer
+                    for (const auto& line : linesBuffer) {
+                        lineDrawer.drawLine(
+                            static_cast<int>(line.x1), static_cast<int>(line.y1),
+                            static_cast<int>(line.x2), static_cast<int>(line.y2),
+                            0.0f, 0.0f, 
+                            {
+                                static_cast<int>(line.r),
+                                static_cast<int>(line.g),
+                                static_cast<int>(line.b),
+                                255
+                            }
+                        );
+                    }
+                    //-- Update the Window
+                    window.update();
+                    //-- Update Time
+                    time += 0.002;
                     //-- Sleep
                     std::this_thread::sleep_for(std::chrono::milliseconds(20));
                 }
