@@ -65,6 +65,10 @@
     # ifndef RK_GRAPHICS_POLYGON
         # include "Polygon.hpp"
     # endif // RK_GRAPHICS_POLYGON
+    //-- Include Triangle
+    # ifndef RK_GRAPHICS_TRIANGLE
+        # include "Triangle.hpp"
+    # endif // RK_GRAPHICS_TRIANGLE
     //-- Include Custom Paths
     # ifndef RK_GRAPHICS_PROJECT_SCREEN_SAVER_CIRCLE_PATH
         # include "CustomPaths.hpp"
@@ -95,9 +99,11 @@
      * @param RK_SCREEN_SAVER_CUSTOM_POLYGON Custom Polygon Screen Saver
      * @param RK_SCREEN_SAVER_WISH_FLOWER Wish Flower Screen Saver
      * @param RK_SCREEN_SAVER_INFINITE Infinite Screen Saver
+     * @param RK_SCREEN_SAVER_TRIANGLE Triangle Screen Saver
      * @param RK_SCREEN_SAVER_RANDOM Random Screen Saver
      * @param RK_SCREEN_SAVER_CIRCLE Circle Screen Saver
      * @param RK_SCREEN_SAVER_CUSTOM Custom Screen Saver
+     * @param RK_SCREEN_SAVER_CIRCLE Circle Screen Saver
      * @param RK_SCREEN_SAVER_HEART Heart Screen Saver
      * @param RK_SCREEN_SAVER_TEST Test Screen Saver
      */
@@ -110,6 +116,8 @@
         RK_SCREEN_SAVER_CUSTOM,
         RK_SCREEN_SAVER_CUSTOM_POLYGON,
         RK_SCREEN_SAVER_CUSTOM_POLYGON_LINE,
+        RK_SCREEN_SAVER_CUSTOM_CIRCLE,
+        RK_SCREEN_SAVER_TRIANGLE,
         RK_SCREEN_SAVER_SOUND_EQUALIZER_CIRCLE,
         RK_SCREEN_SAVER_SOUND_EQUALIZER_LINE,
         RK_SCREEN_SAVER_HEART
@@ -131,7 +139,7 @@
             /**
              * @brief Define RK Line Object
              */
-            RKLine line;
+            synshape::Line line;
             /**
              * @brief Method to Construct a New RKScreenSaver Object
              */
