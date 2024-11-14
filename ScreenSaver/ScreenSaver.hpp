@@ -36,6 +36,14 @@
         # ifndef HAS_RKACPB_MODULE_LINE
             # error "Line is Required for RK Graphics Project 1"
         # endif // HAS_RKACPB_MODULE_LINE
+        //-- Check if Polygon is Configured
+        # ifndef HAS_RKACPB_MODULE_POLYGON
+            # error "Polygon is Required for RK Graphics Project 1"
+        # endif // HAS_RKACPB_MODULE_POLYGON
+        //-- Check if Triangle is Configured
+        # ifndef HAS_RKACPB_MODULE_TRIANGLE
+            # error "Triangle is Required for RK Graphics Project 1"
+        # endif // HAS_RKACPB_MODULE_TRIANGLE
         //-- Check if Custom Paths are Configured
         # ifndef HAS_RKACPB_MODULE_CUSTOMPATHS
             # error "Custom Paths are Required for RK Graphics Project 1"
@@ -93,6 +101,8 @@
      * @brief Screen Saver Types
      * @enum RKScreenSaverType
      * @note This Enum Defines Different Types of Screen Savers
+     * @param RK_SCREEN_SAVER_SCALING_CIRCLE_WITHOUT_FOOTPRINTS Scaling Circle without Footprints Screen Saver
+     * @param RK_SCREEN_SAVER_SCALING_CIRCLE_WITH_FOOTPRINTS Scaling Circle with Footprints Screen Saver
      * @param RK_SCREEN_SAVER_SOUND_EQUALIZER_CIRCLE Circle Shape Sound Equalizer Screen Saver
      * @param RK_SCREEN_SAVER_SOUND_EQUALIZER_LINE Line Shape Sound Equalizer Screen Saver
      * @param RK_SCREEN_SAVER_CUSTOM_POLYGON_LINE Custom Polygon Line Screen Saver
@@ -118,9 +128,12 @@
         RK_SCREEN_SAVER_CUSTOM_POLYGON_LINE,
         RK_SCREEN_SAVER_CUSTOM_CIRCLE,
         RK_SCREEN_SAVER_TRIANGLE,
+        RK_SCREEN_SAVER_SCALING_CIRCLE_WITH_FOOTPRINTS,
+        RK_SCREEN_SAVER_SCALING_CIRCLE_WITHOUT_FOOTPRINTS,
         RK_SCREEN_SAVER_SOUND_EQUALIZER_CIRCLE,
         RK_SCREEN_SAVER_SOUND_EQUALIZER_LINE,
         RK_SCREEN_SAVER_HEART
+
     };
     /**
      * @brief Class to Handle Screen Saver

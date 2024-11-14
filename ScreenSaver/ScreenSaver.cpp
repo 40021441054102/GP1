@@ -112,6 +112,7 @@
             0, RK_SCREEN_SAVER_WINDOW_HEIGHT,
             -1000.0, 1000.0
         );
+        //-- Set OpenGL Frustum
         glFrustum(-100, 100, 0, 0, -20, 50);
         //-- Handle Screen Saver Type
         switch (type) {
@@ -1009,6 +1010,14 @@
                     //-- Sleep
                     std::this_thread::sleep_for(std::chrono::milliseconds(20));
                 }
+                break;
+            }
+            //-- Scaling Circle with Footprints Screen Saver
+            case RK_SCREEN_SAVER_SCALING_CIRCLE_WITH_FOOTPRINTS: {
+                break;
+            }
+            //-- Scaling Circle without Footprints Screen Saver
+            case RK_SCREEN_SAVER_SCALING_CIRCLE_WITHOUT_FOOTPRINTS: {
                 break;
             }
         };
