@@ -103,7 +103,7 @@
      * @brief Method to Construct a New RKScreenSaver Object
      * @param type Screen Saver Type
      */
-    RKScreenSaver::RKScreenSaver(int type = RK_SCREEN_SAVER_CIRCLE) {
+    RKScreenSaver::RKScreenSaver(int type) {
         //-- Show Log Message
         logger(RKG_LABEL INFO "Starting Screen Saver ...");
         //-- Set OpenGL Ortho
